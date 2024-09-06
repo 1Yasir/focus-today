@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Focus on Today</title>
+        <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .sun-icon {
+            font-size: 3em;
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            width: 0; /* Start with 0% */
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-item {
+            background-color: #f5f5f5;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .task-checkbox {
+            margin-right: 15px;
+        }
+
+        .task-text {
+            flex-grow: 1;
+        }
+
+        .task-completed {
+            background-color: #e0f2f1;
+        }
+        .task-completed label{
+            text-decoration: line-through
+        }
+
+        .message {
+            color: #333;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .footer {
+            color: #555;
+            font-size: 0.8em;
+            margin-top: 20px;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Focus on Today</h1>
+            <span class="sun-icon">☀️</span>
+            <p>Just a step away, keep going!</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <p class="progress-text">0% Completed</p>
+            <!-- Display progress percentage -->
+            <ul class="task-list">
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task1">
+                    <label class="task-text" for="task1">Complete this project
+                        today</label>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task2">
+                    <label class="task-text" for="task2">Speak English for 10
+                        minutes</label>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task3">
+                    <label class="task-text" for="task3">Practice Event Listener
+                        in JavaScript</label>
+                </li>
+
+            </ul>
+            <p class="message">"Keep Going, You're making great progress!"</p>
+            <p class="footer">Made with ❤️ by Yasir Mehmood</p>
+        </div>
+
+        <script>
+        const taskCheckboxes = document.querySelectorAll('.task-checkbox');
+        const progressBarFill = document.querySelector('.progress-fill');
+        const progressText = document.querySelector('.progress-text');
+
+        taskCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener("change" , function(){
+                updateProgressBar();
+                
+            })
+        })
+
+
+        function updateProgressBar(){
+            let completedTasks = 0;
+
+            taskCheckboxes.forEach(checkbox =>{
+                const taskItem = checkbox.closest(".task-item");
+
+                if(checkbox.checked){
+                    completedTasks++;
+                    taskItem.classList.add("task-completed");
+                }else{
+                    taskItem.classList.remove("task-completed");
+
+                }
+
+            })
+            
+            const totalTask = taskCheckboxes.length;
+           const percentageCompleted = (completedTasks / totalTask)  * 100;
+           progressBarFill.style.width = percentageCompleted + '%';
+           progressText.textContent = Math.round(percentageCompleted) + "% Completed!";
+
+        }
+
+       
+        
+      
+    </script>
+    </body>
+</html>
